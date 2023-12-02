@@ -1,0 +1,46 @@
+@import "sidebar.css";
+@import "table.css";
+@import "notFound.css";
+@import "new.css";
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.content {
+    margin-left: 250px;
+}
+
+.page {
+    padding: 24px;
+    width: 95%;
+    height: fit-content;
+    padding-bottom: 120px;
+}
+
+.plot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent; 
+}
+
+.plot {
+    width: 70%;
+    background-color: transparent;
+}
+
+.navlink:first-child {
+    border-top: solid 1px;
+}
+
+.navlink:hover {
+    background-color: aqua;
+}
+
+.table {
+    width: 80%;
+    overflow-x: scroll;
+}

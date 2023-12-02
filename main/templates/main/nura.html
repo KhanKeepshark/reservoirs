@@ -1,0 +1,110 @@
+{% extends "main/layout.html"%}
+{% load my_tags %}               
+
+{% block content %}
+    {% if reserv_current %}
+        {% if reserv_current.2Dplot %}
+            <div class="plot-container">
+                <div class="plot">
+                    <h2>Батиметрическая карта реки {{ name }} в 2Д</h2>
+                    <div>
+                        {{ reserv_current.2Dplot|safe }}
+                    </div>
+                </div>
+                <div class="plot">
+                    <h2>Батиметрическая карта реки {{ name }} в 3Д</h2>
+                    <div>
+                        {{ reserv_current.3Dplot|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if reserv_current.chemistry %}
+            <h2 class="tableHead">Таблица химического состава реки {{ name }}</h2>
+            <form method="get" action="" class="search">
+                <div>
+                    <label>Химический элемент:</label>
+                    <input type="text" id="filterInput" name="filter" value="{{ request.GET.filter }}">
+                </div>
+                <div>
+                    <label for="startDateInput">Начальная дата:</label>
+                    <input type="date" id="startDateInput" name="start_date" value="{{ request.GET.start_date }}">
+                </div>
+                <div>
+                    <label for="endDateInput">Конечная дата:</label>
+                    <input type="date" id="endDateInput" name="end_date" value="{{ request.GET.end_date }}">
+                </div>
+                <div>
+                    Сортировка
+                     <select name="sort_order" >
+                        <option value="desc" {% if request.GET.sort_order == 'desc' %}selected{% endif %}>По убыванию</option>
+                        <option value="asc" {% if request.GET.sort_order == 'asc' %}selected{% endif %}>По возрастанию</option>
+                        <option value="none" {% if request.GET.sort_order == 'none' or not request.GET.sort_order %}selected{% endif %}>Нет</option>
+                    </select>
+                </div>
+                <button type="submit">Найти</button>
+            </form>
+            <div class="table-container">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            {% for name in reserv_current.chemistry.names %}
+                                {% if filter %}
+                                    {% if filter == name %}
+                                        <th> {{ name }}</th>
+                                    {% endif %}
+                                {% else %}
+                                    <th>{{ name }}</th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% getIndex reserv_current.chemistry.keys reserv_current.chemistry.names filter as sorted_index %}
+                        {% custom_sort reserv_current.chemistry.data sort_order sorted_index as sorted_data %}
+                        {% for elem in sorted_data %}
+                                {% if request.GET.start_date and request.GET.end_date %}
+                                    {% if elem.uploaded_at|convert_date_format >= request.GET.start_date and elem.uploaded_at|convert_date_format <= request.GET.end_date %}
+                                        <tr>
+                                            {% for key in reserv_current.chemistry.keys %}
+                                                {% if filter %}
+                                                    {% if filter == reserv_current.chemistry.names|get_item:forloop.counter0 %}
+                                                        <th>{{ elem|attr:key }}</th>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <th>{{ elem|attr:key }}</th>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endif %}
+                                {% else %}
+                                    <tr>
+                                        {% for key in reserv_current.chemistry.keys %}
+                                            {% if filter %}
+                                                {% if filter == reserv_current.chemistry.names|get_item:forloop.counter0 %}
+                                                    <th>{{ elem|attr:key }}</th>
+                                                {% endif %}
+                                            {% else %}
+                                                <th>{{ elem|attr:key }}</th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% for column, plot_div in reserv_current.chemistry.plots.items %}
+                {% if filter %}
+                    {% if filter == reserv_current.chemistry.names|get_item:forloop.counter0 %}
+                        <div>{{ plot_div|safe }}</div>
+                    {% endif %}
+                {% else %}
+                    <div>{{ plot_div|safe }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <div class="notFound">Данные не найдены</div>
+    {% endif %}
+{% endblock %}

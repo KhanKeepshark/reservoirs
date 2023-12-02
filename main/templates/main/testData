@@ -1,0 +1,63 @@
+                                <!-- <td>{{ elem.uploaded_at }}</td>
+                                <td>{{ elem.carbonates }}</td>
+                                <td>{{ elem.bicarbonates }}</td>
+                                <td>{{ elem.chlorides }}</td>
+                                <td>{{ elem.sulfates }}</td>
+                                <td>{{ elem.nitrates }}</td>
+                                <td>{{ elem.anionsum }}</td>
+                                <td>{{ elem.calcium }}</td>
+                                <td>{{ elem.magnesium }}</td>
+                                <td>{{ elem.sodium_and_potassium }}</td>
+                                <td>{{ elem.iron }}</td>
+                                <td>{{ elem.sum_of_cations }}</td>
+                                <td>{{ elem.Mineralization }}</td>
+                                <td>{{ elem.Dry_residue }}</td> -->
+
+        
+
+                        <!-- <th>Date</th>
+                        <th>Carbonates</th>
+                        <th>Bicarbonates</th>
+                        <th>Chlorides</th>
+                        <th>Sulfates</th>
+                        <th>Nitrates</th>
+                        <th>Anion Sum</th>
+                        <th>Calcium</th>
+                        <th>Magnesium</th>
+                        <th>Sodium and Potassium</th>
+                        <th>Iron</th>
+                        <th>Sum of Cations</th>
+                        <th>Mineralization</th>
+                        <th>Dry Residue</th> -->
+
+         <!-- {% for elem in reserv_current.chemistry %}
+            <div>{{ elem.anionsum }}</div>
+        {% endfor %} -->
+        <!-- {% if reserv_current.html_excel %}
+            <div class="table-container">
+                <h2 class="tableHead">Таблица химического состава реки {{ name }}</h2>
+                {{ reserv_current.html_excel|safe }}
+            </div>
+        {% for column, plot_div in reserv_current.excel_plots.items %}
+            <div>{{ plot_div|safe }}</div>
+        {% endfor %}
+        {% endif %} -->
+
+        utils
+
+                    # .first().anionsum
+            # excel data
+            # excel_file = ExcelFile.objects.get(reservoir = reserv)
+            # reserv_info["reservoir"] = reserv
+            # if excel_file:
+            #     with excel_file.file.open('rb') as file:
+            #         excel_data1 = pd.read_excel(file)
+            #         html_excel = excel_data1.to_html()
+            # reserv_info["html_excel"] = html_excel
+            # # excel plots
+            # plot_divs = {}
+            # for column in excel_data1.columns[1:]:
+            #     fig = px.line(excel_data1, x='Collection date', y=column, title=f'График изменений для {column}')
+            #     plot_div = pio.to_html(fig, full_html=False)
+            #     plot_divs[column] = plot_div
+            # reserv_info["excel_plots"] = plot_divs

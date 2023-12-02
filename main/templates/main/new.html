@@ -1,0 +1,13 @@
+{% extends "main/layout.html"%}
+
+{% block content %}
+    <form method="post" class="block" enctype="multipart/form-data">
+        <h2>Добавить водохранилице</h2>
+        <div class="form">
+            {% csrf_token %}
+            {{ form.title }}
+            {{ form.category }}
+            <button class="btn" type="submit">Сохранить</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+
+.block{
+    margin-top: 40px;
+}
+
+.form{
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+    margin-bottom: 80px;
+}
+
+.form-control{
+    padding: 4px;
+}
+
+.form-select{
+    padding: 4px;
+}
+
+.btn{
+    padding: 4px;
+}
