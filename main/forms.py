@@ -38,22 +38,3 @@ class TextFileForm(ModelForm):
                 "required": True,
             }),
         }
-
-# class ExcelFileForm(ModelForm):
-
-#     class Meta:
-#         model = ExcelFile
-#         fields = ["file", "reservoir"]
-#         widgets = {
-#             "file": TextInput(attrs={
-#                 "class": "form-control",
-#                 "placeholder": "Название",
-#                 'type': 'file',
-#                 "accept": ".xlsx",
-#                 "required": True
-#             }),
-#             "reservoir": Select(attrs={
-#                 'class': 'form-select',
-#                 "required": True,
-#             }),
-#         }

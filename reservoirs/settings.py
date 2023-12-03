@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rfitev&!g5*#j#*l^@ry84dz0k#hvj^*y40(%ohs(4t-9h_=vo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['185.100.67.121']
 
 
 # Application definition
@@ -116,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/django-project/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

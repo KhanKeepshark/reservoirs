@@ -3,7 +3,6 @@ from .models import Reservoirs
 from django.shortcuts import redirect
 from .forms import ReservoirsForm
 from .utils import get_reservoirs
-from .models import ChemistryData
 reservoirs = Reservoirs.objects.all()
 
 def index(req):

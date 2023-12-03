@@ -16,7 +16,7 @@ def get_reservoirs(reservoirs):
             text_file = TextFile.objects.filter(reservoir=reserv).first()
             if text_file:
                 with text_file.file.open(mode='r') as file:
-                    data = np.loadtxt(file, delimiter=',')
+                    data = np.loadtxt(file, delimiter=',', dtype=np.float32)
                     x_size = int(np.max(data[:, 0]))
                     y_size = int(np.max(data[:, 1]))
                     depth = np.zeros((y_size, x_size))
@@ -25,8 +25,10 @@ def get_reservoirs(reservoirs):
                         depth[int(y)-1, int(x)-1] = z
                     # 2D
                     fig2D = go.Figure(data=go.Heatmap(z=depth))
+                    del data
                     fig2D.update_layout(title='2D Plot')
                     plot2D1_div = fig2D.to_html(full_html=False)
+                    del fig2D
                     # 3D
                     fig3D = make_subplots(rows=1, cols=1, specs=[[{'type': 'surface'}]])
                     fig3D.add_trace(go.Surface(z=depth), row=1, col=1)
@@ -42,6 +44,7 @@ def get_reservoirs(reservoirs):
                         )
                     )
                     plot3D2_div = fig3D.to_html(full_html=False)
+                    del fig3D
                     reserv_info["2Dplot"] = plot2D1_div
                     reserv_info["3Dplot"] = plot3D2_div
             # chemistry data
